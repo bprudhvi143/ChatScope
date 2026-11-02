@@ -1,0 +1,41 @@
+/* Shared visual alignment refinements for dashboard and analytics views. */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+.app-shell, .main, .content, .dashboard-grid, .analytics-grid,
+.chart-card, .chart-wrap { min-width: 0; }
+
+.dashboard-grid, .analytics-grid { align-items: stretch; }
+
+.chart-card {
+  display: flex;
+  min-height: 308px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.analytics-grid .chart-card { min-height: 336px; }
+
+.chart-card .card-head { min-height: 35px; align-items: flex-start; }
+
+.chart-wrap, .analytics-grid .chart-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 14px;
+}
+
+.chart-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.data-table td, .data-table th { vertical-align: middle; }
+
+@media (max-width: 1050px) {
+  .analytics-grid .chart-card { min-height: 320px; }
+}
+
+@media (max-width: 760px) {
+  .chart-card, .analytics-grid .chart-card { min-height: 290px; }
+  .chart-wrap, .analytics-grid .chart-wrap { min-height: 205px; }
+}

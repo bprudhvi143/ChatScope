@@ -95,12 +95,12 @@
     });
     ctx.fillStyle = '#22263a'; ctx.font = '700 19px Inter, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(total.toLocaleString(), centerX, centerY + 5);
     text(ctx, 'messages', centerX, centerY + 21, 'center');
-    values.slice(0, 4).forEach((item, index) => {
-      const y = height - 18 + (index > 1 ? 0 : 0);
-      const x = 12 + (index % 2) * (width / 2);
-      if (index > 1) return;
-      ctx.fillStyle = palette[index]; ctx.fillRect(x, y - 7, 7, 7);
-      text(ctx, item.label.length > 17 ? `${item.label.slice(0, 16)}…` : item.label, x + 11, y);
+    values.slice(0, 2).forEach((item, index) => {
+      const x = width * (index ? .75 : .25);
+      const y = height - 14;
+      const label = item.label.length > 18 ? `${item.label.slice(0, 17)}…` : item.label;
+      ctx.fillStyle = palette[index]; ctx.fillRect(x - 50, y - 7, 7, 7);
+      text(ctx, label, x - 39, y);
     });
   };
 

@@ -13,12 +13,20 @@
     document.head.append(theme);
   }
 
+  if (!document.querySelector('link[data-chatscope-layout]')) {
+    const layout = document.createElement('link');
+    layout.rel = 'stylesheet';
+    layout.href = `${window.location.pathname.split('/').slice(0, 2).join('/')}/assets/layout-refinements.css?v=1`;
+    layout.dataset.chatscopeLayout = 'true';
+    document.head.append(layout);
+  }
+
   // Old views may have a cached chart script or an inline-data policy that
   // prevents the original renderer from starting. Load the versioned renderer
   // whenever a dashboard chart canvas is present.
   if (document.querySelector('canvas[id$="Chart"]') && !document.querySelector('script[data-chatscope-charts]')) {
     const charts = document.createElement('script');
-    charts.src = `${window.location.pathname.split('/').slice(0, 2).join('/')}/assets/charts.js?v=3`;
+    charts.src = `${window.location.pathname.split('/').slice(0, 2).join('/')}/assets/charts.js?v=4`;
     charts.dataset.chatscopeCharts = 'true';
     document.head.append(charts);
   }

@@ -44,8 +44,8 @@ public class AssetVersionFilter implements Filter {
         String contextPath = httpRequest.getContextPath();
         String html = captured.body()
                 .replace("https://cdn.jsdelivr.net/npm/chart.js", contextPath + "/assets/chart.umd.min.js?v=1")
-                .replace(contextPath + "/assets/charts.js\"", contextPath + "/assets/charts.js?v=3\"")
-                .replace(contextPath + "/assets/app.js\"", contextPath + "/assets/app.js?v=4\"")
+                .replace(contextPath + "/assets/charts.js\"", contextPath + "/assets/charts.js?v=4\"")
+                .replace(contextPath + "/assets/app.js\"", contextPath + "/assets/app.js?v=5\"")
                 .replace(contextPath + "/assets/app.css\"", contextPath + "/assets/app.css?v=4\"");
         byte[] output = html.getBytes(StandardCharsets.UTF_8);
         httpResponse.setContentLength(output.length);
