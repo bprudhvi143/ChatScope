@@ -1,0 +1,11 @@
+# Build and IDE output
+target/
+.idea/
+*.iml
+
+# Local database credentials
+src/main/resources/db.properties
+
+# Workspace-provided reference material
+sources/
+AGENTS.md
