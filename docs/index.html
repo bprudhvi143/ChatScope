@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatScope — Chat Log Analyzer</title>
+  <meta name="description" content="ChatScope is a Java full-stack chat log analyzer for importing, searching, and visualizing conversation data.">
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #171a2b; background: #f8f9fc; }
+    * { box-sizing: border-box; } body { margin: 0; } main { max-width: 1080px; margin: 0 auto; padding: 32px 22px 72px; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 62px; font-weight: 800; letter-spacing: -.05em; }
+    .brand { display:flex; align-items:center; gap:9px; } .mark { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg,#685cfb,#9269ee); color:white; }
+    .brand span { color:#635bff; } .hero { text-align:center; max-width:740px; margin:0 auto 54px; } .eyebrow { color:#635bff; font-size:11px; letter-spacing:.14em; font-weight:800; }
+    h1 { font-size:clamp(38px,7vw,69px); letter-spacing:-.07em; line-height:1; margin:16px 0; } h1 em { color:#635bff; font-style:normal; } .hero p { color:#73798d; line-height:1.65; font-size:17px; }
+    .button { display:inline-block; margin-top:12px; padding:12px 17px; border-radius:10px; background:#635bff; color:#fff; text-decoration:none; font-size:14px; font-weight:700; box-shadow:0 8px 20px rgba(99,91,255,.22); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; } article { background:#fff; border:1px solid #e8e9f0; border-radius:16px; padding:22px; box-shadow:0 2px 5px rgba(30,34,58,.02); } article b { display:block; margin-bottom:8px; } article p { margin:0; color:#73798d; line-height:1.55; font-size:14px; }
+    .notice { margin-top:48px; padding:20px 23px; border-radius:16px; background:#efeeff; color:#413c77; } .notice b { display:block; margin-bottom:5px; } code { background:#fff; border-radius:5px; padding:2px 5px; }
+    footer { padding-top:42px; color:#858b9e; font-size:13px; text-align:center; } @media(max-width:700px) { nav { padding-bottom:43px; } .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav><div class="brand"><span class="mark">⌁</span>chat<span>scope</span></div><a href="https://github.com/bprudhvi143/ChatScope" aria-label="Open GitHub repository">GitHub ↗</a></nav>
+    <section class="hero">
+      <div class="eyebrow">JAVA FULL-STACK ANALYTICS</div>
+      <h1>Your conversations,<br><em>in focus.</em></h1>
+      <p>ChatScope imports CSV chat logs, makes every message searchable, and turns real conversation data into clear, responsive analytics.</p>
+      <a class="button" href="https://github.com/bprudhvi143/ChatScope">View source code →</a>
+    </section>
+    <section class="grid">
+      <article><b>Import with confidence</b><p>Bring in conversations using a predictable CSV format with useful validation feedback.</p></article>
+      <article><b>Explore every message</b><p>Search messages safely and browse conversations, participants, and their activity.</p></article>
+      <article><b>See the bigger picture</b><p>Use live message trends, participant rankings, activity patterns, and conversation distribution.</p></article>
+    </section>
+    <section class="notice"><b>Running the application</b>This GitHub Pages site is the project landing page. The full application needs a Java servlet container and MySQL; run the packaged WAR with Tomcat, then open <code>/chat-log-analyzer/</code>.</section>
+    <footer>ChatScope · Java Servlets · JSP · Hibernate · MySQL</footer>
+  </main>
+</body>
+</html>
