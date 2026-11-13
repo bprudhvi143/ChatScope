@@ -16,12 +16,23 @@ public class ImportServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/import.jsp").forward(request, response);
     }
     @Override protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part file = request.getPart("chatFile");
-        if (file == null || file.getSize() == 0) { request.setAttribute("error", "Choose a CSV file first."); doGet(request, response); return; }
-        if (!file.getSubmittedFileName().toLowerCase().endsWith(".csv")) { request.setAttribute("error", "Only CSV files are accepted."); doGet(request, response); return; }
-        try (InputStreamReader reader = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8)) {
-            ChatImportService service = (ChatImportService) getServletContext().getAttribute("chatImportService");
-            ImportResult result = service.importCsv(reader);
+        ChatImportService service = (ChatImportService) getServletContext().getAttribute("chatImportService");
+        try {
+            ImportResult result;
+            String pastedContent = request.getParameter("pastedContent");
+            if (pastedContent != null) {
+                result = service.importPastedConversation(
+                        request.getParameter("conversationTitle"),
+                        request.getParameter("sourceType"),
+                        pastedContent);
+            } else {
+                Part file = request.getPart("chatFile");
+                if (file == null || file.getSize() == 0) { request.setAttribute("error", "Choose a CSV file first."); doGet(request, response); return; }
+                if (!file.getSubmittedFileName().toLowerCase().endsWith(".csv")) { request.setAttribute("error", "Only CSV files are accepted."); doGet(request, response); return; }
+                try (InputStreamReader reader = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8)) {
+                    result = service.importCsv(reader);
+                }
+            }
             request.getSession().setAttribute("flash", result.importedMessages() + " messages imported into “" + result.conversationTitle() + "”.");
             response.sendRedirect(request.getContextPath() + "/conversations");
         } catch (IllegalArgumentException exception) { request.setAttribute("error", exception.getMessage()); doGet(request, response); }

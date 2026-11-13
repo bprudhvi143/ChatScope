@@ -39,3 +39,40 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .chart-card, .analytics-grid .chart-card { min-height: 290px; }
   .chart-wrap, .analytics-grid .chart-wrap { min-height: 205px; }
 }
+
+.import-method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.import-method-grid .upload-panel { display: flex; flex-direction: column; min-width: 0; }
+.import-panel-heading { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+.import-panel-heading .eyebrow { margin-bottom: 3px; }
+.import-panel-heading h3, .format-guide h3 { margin: 0; font-size: 16px; letter-spacing: -.03em; }
+.method-icon { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; background: #efeeff; color: #6259ef; font-size: 18px; }
+.import-method-grid .drop-zone { min-height: 215px; flex: 1; }
+.import-submit { width: 100%; margin-top: 14px; }
+.paste-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.paste-fields label, .paste-label { display: grid; gap: 6px; color: #586075; font-size: 11px; font-weight: 700; }
+.paste-fields input, .paste-label textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); font: 12px Inter, sans-serif; outline: 0; }
+.paste-fields input { height: 38px; padding: 0 10px; }
+.paste-label { margin-top: 12px; }
+.paste-label textarea { min-height: 164px; resize: vertical; padding: 10px; line-height: 1.55; }
+.paste-fields input:focus, .paste-label textarea:focus { border-color: #8b84f5; box-shadow: 0 0 0 3px rgba(99,91,255,.1); }
+.paste-hint { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.paste-hint code { color: #5b52dd; font-size: 10px; }
+.format-guide { margin-top: 16px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.format-guide .format-list { grid-template-columns: repeat(3, 1fr); align-items: start; }
+.format-guide .action-link { align-self: center; }
+.toast-error { background: #fff0f1; color: #b42318; }
+
+@media (max-width: 850px) {
+  .import-method-grid { grid-template-columns: 1fr; }
+  .format-guide .format-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+  .paste-fields { grid-template-columns: 1fr; }
+}

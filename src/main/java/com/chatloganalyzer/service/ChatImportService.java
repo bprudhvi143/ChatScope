@@ -23,6 +23,51 @@ public class ChatImportService {
     public ImportResult importCsv(Reader reader) throws IOException {
         List<ImportRow> rows = parseCsv(reader);
         if (rows.isEmpty()) throw new IllegalArgumentException("The CSV has no valid message rows.");
+        return persistRows(rows);
+    }
+
+    /**
+     * Imports one pasted conversation. Each non-empty line must use either
+     * "Sender: message" or "[yyyy-MM-dd HH:mm] Sender: message".
+     */
+    public ImportResult importPastedConversation(String title, String sourceType, String content) {
+        if (title == null || title.isBlank()) throw new IllegalArgumentException("Enter a conversation title.");
+        if (content == null || content.isBlank()) throw new IllegalArgumentException("Paste at least one message.");
+        if (content.length() > 500_000) throw new IllegalArgumentException("The pasted conversation is too large. Use a CSV import for very large files.");
+
+        String safeTitle = title.trim();
+        String safeSource = sourceType == null || sourceType.isBlank() ? "Manual paste" : sourceType.trim();
+        List<ImportRow> rows = new ArrayList<>();
+        LocalDateTime fallbackTime = LocalDateTime.now();
+        String[] lines = content.replace("\r\n", "\n").replace('\r', '\n').split("\n");
+        for (String rawLine : lines) {
+            String line = rawLine.trim();
+            if (line.isEmpty()) continue;
+            LocalDateTime sentAt = fallbackTime.plusSeconds(rows.size());
+            String messageLine = line;
+            if (line.startsWith("[")) {
+                int closeBracket = line.indexOf(']');
+                if (closeBracket > 1) {
+                    sentAt = parseDate(line.substring(1, closeBracket).trim());
+                    messageLine = line.substring(closeBracket + 1).trim();
+                }
+            }
+            int separator = messageLine.indexOf(':');
+            if (separator < 1 || separator == messageLine.length() - 1) {
+                throw new IllegalArgumentException("Each pasted line must be Sender: message. Check line " + (rows.size() + 1) + ".");
+            }
+            String sender = messageLine.substring(0, separator).trim();
+            String body = messageLine.substring(separator + 1).trim();
+            if (sender.isBlank() || body.isBlank()) {
+                throw new IllegalArgumentException("Sender and message cannot be blank in line " + (rows.size() + 1) + ".");
+            }
+            rows.add(new ImportRow(safeTitle, safeSource, sender, sentAt, body));
+        }
+        if (rows.isEmpty()) throw new IllegalArgumentException("Paste at least one message.");
+        return persistRows(rows);
+    }
+
+    private ImportResult persistRows(List<ImportRow> rows) {
         String title = rows.get(0).conversationTitle();
         int imported = 0;
         try (Session session = sessionFactory.openSession()) {
