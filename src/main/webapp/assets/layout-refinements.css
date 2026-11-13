@@ -76,3 +76,25 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 500px) {
   .paste-fields { grid-template-columns: 1fr; }
 }
+
+/* Conversation and search result cards must remain stable for pasted text,
+   long sender names, URLs, and unbroken words. */
+.page-head > div, .title-cell, .message-list, .message-card { min-width: 0; }
+.message-list { width: 100%; max-width: 100%; }
+.message-card { width: 100%; overflow: hidden; padding: 18px 20px; }
+.message-meta { min-width: 0; flex-wrap: wrap; row-gap: 7px; }
+.message-meta b { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+.message-meta time { min-width: 0; max-width: 100%; overflow-wrap: anywhere; white-space: nowrap; }
+.message-card p, .message-ref, .title-cell, .subtle {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.message-card p { margin-right: 0; }
+
+@media (max-width: 620px) {
+  .message-card { padding: 15px; }
+  .message-meta time { flex-basis: calc(100% - 37px); margin-left: 37px; text-align: left; white-space: normal; }
+  .page-head .action-link { max-width: 100%; overflow-wrap: anywhere; }
+}

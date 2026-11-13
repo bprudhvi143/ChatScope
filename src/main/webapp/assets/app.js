@@ -16,7 +16,7 @@
   if (!document.querySelector('link[data-chatscope-layout]')) {
     const layout = document.createElement('link');
     layout.rel = 'stylesheet';
-    layout.href = `${window.location.pathname.split('/').slice(0, 2).join('/')}/assets/layout-refinements.css?v=1`;
+    layout.href = `${window.location.pathname.split('/').slice(0, 2).join('/')}/assets/layout-refinements.css?v=2`;
     layout.dataset.chatscopeLayout = 'true';
     document.head.append(layout);
   }
